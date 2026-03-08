@@ -3,13 +3,21 @@ import { Alert, AlertTitle, AlertDescription } from "../components/ui/alert";
 import {
   Card,
   CardHeader,
-  CardTitle,
   CardContent,
   CardAction,
 } from "../components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogBody,
+  DialogFooter,
+  DialogCloseButton,
+} from "../components/ui/dialog";
 import { CheckCircle, AlertCircle, Info, X } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { Table, Modal } from "../components/organisms";
+import { Table } from "../components/organisms";
 import { UserForm, PostForm } from "../components/forms";
 import { userService } from "../services/userService";
 import { postService } from "../services/postService";
@@ -537,17 +545,30 @@ export const ManagementPage: React.FC = () => {
         </Card>
       </div>
 
-      <Modal
-        isOpen={isCreateModalOpen}
-        onClose={() => {
-          setIsCreateModalOpen(false);
-          setFormData({});
-        }}
-        title={`새 ${entityType === "user" ? "사용자" : "게시글"} 만들기`}
-        size="large"
-        showFooter
-        footerContent={
-          <>
+      <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
+        <DialogContent size="large">
+          <DialogHeader>
+            <DialogTitle>
+              {`새 ${entityType === "user" ? "사용자" : "게시글"} 만들기`}
+            </DialogTitle>
+            <DialogCloseButton onClick={() => setIsCreateModalOpen(false)} />
+          </DialogHeader>
+          <DialogBody>
+            {entityType === "user" ? (
+              <UserForm
+                data={formData}
+                onChange={setFormData}
+                checkBusinessRules={true}
+              />
+            ) : (
+              <PostForm
+                data={formData}
+                onChange={setFormData}
+                checkBusinessRules={true}
+              />
+            )}
+          </DialogBody>
+          <DialogFooter>
             <Button
               variant="secondary"
               size="md"
@@ -561,38 +582,46 @@ export const ManagementPage: React.FC = () => {
             <Button variant="primary" size="md" onClick={handleCreate}>
               생성
             </Button>
-          </>
-        }
-      >
-        <div>
-          {entityType === "user" ? (
-            <UserForm
-              data={formData}
-              onChange={setFormData}
-              checkBusinessRules={true}
-            />
-          ) : (
-            <PostForm
-              data={formData}
-              onChange={setFormData}
-              checkBusinessRules={true}
-            />
-          )}
-        </div>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
-      <Modal
-        isOpen={isEditModalOpen}
-        onClose={() => {
-          setIsEditModalOpen(false);
-          setFormData({});
-          setSelectedItem(null);
-        }}
-        title={`${entityType === "user" ? "사용자" : "게시글"} 수정`}
-        size="large"
-        showFooter
-        footerContent={
-          <>
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent size="large">
+          <DialogHeader>
+            <DialogTitle>
+              {`${entityType === "user" ? "사용자" : "게시글"} 수정`}
+            </DialogTitle>
+            <DialogCloseButton onClick={() => setIsEditModalOpen(false)} />
+          </DialogHeader>
+          <DialogBody>
+            {selectedItem && (
+              <Alert variant="info" className="mb-6">
+                <Info className="h-4 w-4" />
+                <AlertTitle>정보</AlertTitle>
+                <AlertDescription>
+                  ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
+                  {entityType === "post" &&
+                    ` | 조회수: ${(selectedItem as Post).views}`}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {entityType === "user" ? (
+              <UserForm
+                data={formData}
+                onChange={setFormData}
+                checkBusinessRules={true}
+              />
+            ) : (
+              <PostForm
+                data={formData}
+                onChange={setFormData}
+                checkBusinessRules={true}
+              />
+            )}
+          </DialogBody>
+          <DialogFooter>
             <Button
               variant="secondary"
               size="md"
@@ -607,37 +636,9 @@ export const ManagementPage: React.FC = () => {
             <Button variant="primary" size="md" onClick={handleUpdate}>
               수정 완료
             </Button>
-          </>
-        }
-      >
-        <div>
-          {selectedItem && (
-            <Alert variant="info" className="mb-6">
-              <Info className="h-4 w-4" />
-              <AlertTitle>정보</AlertTitle>
-              <AlertDescription>
-                ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
-                {entityType === "post" &&
-                  ` | 조회수: ${(selectedItem as Post).views}`}
-              </AlertDescription>
-            </Alert>
-          )}
-
-          {entityType === "user" ? (
-            <UserForm
-              data={formData}
-              onChange={setFormData}
-              checkBusinessRules={true}
-            />
-          ) : (
-            <PostForm
-              data={formData}
-              onChange={setFormData}
-              checkBusinessRules={true}
-            />
-          )}
-        </div>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

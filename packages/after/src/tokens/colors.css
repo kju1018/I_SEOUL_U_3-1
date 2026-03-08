@@ -136,6 +136,12 @@
   --shadow-card-elevated:
     0px 2px 4px -1px var(--alpha-black-12),
     0px 1px 2px 0px var(--alpha-black-8), 0px 1px 4px 0px var(--alpha-black-8);
+
+  /* Modal Specific Shadows */
+  --shadow-modal:
+    0px 11px 15px -7px var(--alpha-black-20),
+    0px 24px 38px 3px var(--alpha-black-14),
+    0px 9px 46px 8px var(--alpha-black-12);
 }
 
 /* 
@@ -213,4 +219,7 @@
   /* Card Shadows */
   --shadow-card-default: var(--shadow-card-default);
   --shadow-card-elevated: var(--shadow-card-elevated);
+
+  /* Modal Shadows */
+  --shadow-modal: var(--shadow-modal);
 }
