@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Alert, AlertTitle, AlertDescription } from "../components/ui/alert";
+import { CheckCircle, AlertCircle, Info, X } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { Alert, Table, Modal } from "../components/organisms";
+import { Table, Modal } from "../components/organisms";
 import { UserForm, PostForm } from "../components/forms";
 import { userService } from "../services/userService";
 import { postService } from "../services/postService";
@@ -336,25 +338,33 @@ export const ManagementPage: React.FC = () => {
             </div>
 
             {showSuccessAlert && (
-              <div style={{ marginBottom: "10px" }}>
-                <Alert
-                  variant="success"
-                  title="성공"
-                  onClose={() => setShowSuccessAlert(false)}
-                >
-                  {alertMessage}
+              <div className="mb-4">
+                <Alert variant="success" className="relative pr-12">
+                  <CheckCircle className="h-4 w-4" />
+                  <AlertTitle>성공</AlertTitle>
+                  <AlertDescription>{alertMessage}</AlertDescription>
+                  <button
+                    onClick={() => setShowSuccessAlert(false)}
+                    className="absolute right-2.5 top-2.5 hover:opacity-70 transition-opacity p-1 leading-none flex items-center justify-center shrink-0"
+                  >
+                    <X className="size-5" />
+                  </button>
                 </Alert>
               </div>
             )}
 
             {showErrorAlert && (
-              <div style={{ marginBottom: "10px" }}>
-                <Alert
-                  variant="error"
-                  title="오류"
-                  onClose={() => setShowErrorAlert(false)}
-                >
-                  {errorMessage}
+              <div className="mb-4">
+                <Alert variant="destructive" className="relative pr-12">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>오류</AlertTitle>
+                  <AlertDescription>{errorMessage}</AlertDescription>
+                  <button
+                    onClick={() => setShowErrorAlert(false)}
+                    className="absolute right-2.5 top-2.5 hover:opacity-70 transition-opacity p-1 leading-none flex items-center justify-center shrink-0"
+                  >
+                    <X className="size-5" />
+                  </button>
                 </Alert>
               </div>
             )}
@@ -607,10 +617,14 @@ export const ManagementPage: React.FC = () => {
       >
         <div>
           {selectedItem && (
-            <Alert variant="info">
-              ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
-              {entityType === "post" &&
-                ` | 조회수: ${(selectedItem as Post).views}`}
+            <Alert variant="info" className="mb-6">
+              <Info className="h-4 w-4" />
+              <AlertTitle>정보</AlertTitle>
+              <AlertDescription>
+                ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
+                {entityType === "post" &&
+                  ` | 조회수: ${(selectedItem as Post).views}`}
+              </AlertDescription>
             </Alert>
           )}
 
