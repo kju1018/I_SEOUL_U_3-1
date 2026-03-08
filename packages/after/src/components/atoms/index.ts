@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export { Badge } from './Badge';
+export { Button } from "../ui/button";
+export { Badge } from "./Badge";
