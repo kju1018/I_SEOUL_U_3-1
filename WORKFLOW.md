@@ -9,11 +9,11 @@ before → after 마이그레이션 작업 순서입니다.
 
 > 나머지 모든 작업의 기반이 되므로 가장 먼저 완료해야 합니다.
 
-- [ ] `packages/after`에 TailwindCSS v4 설치 및 설정 (`postcss.config.js`, `tailwind.config`)
-- [ ] `packages/after`에 shadcn/ui 초기화 (`npx shadcn-ui@latest init`)
+- [X] `packages/after`에 TailwindCSS v4 설치 및 설정 (`postcss.config.js`, `tailwind.config`)
+- [X] `packages/after`에 shadcn/ui 초기화 (`npx shadcn-ui@latest init`)
   - `components.json` 생성 확인
   - alias `@` 경로 설정 확인 (`vite.config.ts`에 이미 설정됨)
-- [ ] `src/test/setup.ts` 및 Vitest 설정이 before와 동일하게 되어 있는지 확인
+- [X] `src/test/setup.ts` 및 Vitest 설정이 before와 동일하게 되어 있는지 확인
 
 ---
 
