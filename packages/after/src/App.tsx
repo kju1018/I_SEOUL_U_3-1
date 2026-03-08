@@ -5,9 +5,9 @@ import "./styles/components.css";
 
 export const App: React.FC = () => {
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#f7fafc" }}>
+    <div className="min-h-screen bg-bg-secondary transition-colors duration-300">
       <Header />
-      <main>
+      <main className="mx-auto max-w-[1400px] p-6">
         <ManagementPage />
       </main>
     </div>

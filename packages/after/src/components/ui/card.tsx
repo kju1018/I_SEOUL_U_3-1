@@ -4,14 +4,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "flex flex-col rounded-[4px] mb-4 overflow-hidden bg-white font-['Roboto','Helvetica','Arial',sans-serif]",
+  "flex flex-col rounded-[4px] mb-4 overflow-hidden bg-bg-primary font-['Roboto','Helvetica','Arial',sans-serif] transition-colors",
   {
     variants: {
       variant: {
-        default: "border border-[rgba(0,0,0,0.12)] shadow-card-default",
-        bordered: "border border-[rgba(0,0,0,0.12)] shadow-none",
-        elevated: "border border-[rgba(0,0,0,0.08)] shadow-card-elevated",
-        flat: "border border-[rgba(0,0,0,0.08)] bg-neutral-bg-flat shadow-none",
+        default: "border border-alpha-border shadow-card-default",
+        bordered: "border border-alpha-border shadow-none",
+        elevated: "border border-alpha-border-light shadow-card-elevated",
+        flat: "border border-alpha-border-light bg-neutral-bg-flat shadow-none",
       },
     },
     defaultVariants: {
@@ -38,7 +38,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "flex justify-between items-center p-5 border-b border-[rgba(0,0,0,0.08)] bg-neutral-bg-flat",
+        "flex justify-between items-center p-5 border-b border-alpha-border-light bg-neutral-bg-flat transition-colors",
         className,
       )}
       {...props}
@@ -51,7 +51,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"h3">) {
     <h3
       data-slot="card-title"
       className={cn(
-        "m-0 text-[1.125rem] font-medium leading-[1.6] text-[rgba(0,0,0,0.87)]",
+        "m-0 text-[1.125rem] font-medium leading-[1.6] text-text-primary",
         className,
       )}
       {...props}
@@ -64,7 +64,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"p">) {
     <p
       data-slot="card-description"
       className={cn(
-        "mt-1 text-[0.875rem] font-normal leading-[1.43] text-[rgba(0,0,0,0.6)]",
+        "mt-1 text-[0.875rem] font-normal leading-[1.43] text-text-secondary",
         className,
       )}
       {...props}

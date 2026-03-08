@@ -21,6 +21,7 @@ import { TableContainer } from "../components/table/TableContainer";
 import { UserForm, PostForm } from "../components/forms";
 import { userService } from "../services/userService";
 import { postService } from "../services/postService";
+import { cn } from "../lib/utils";
 import type { User } from "../services/userService";
 import type { Post } from "../services/postService";
 import "../styles/components.css";
@@ -195,54 +196,62 @@ export const ManagementPage: React.FC = () => {
   const getStats = () => {
     if (entityType === "user") {
       const users = data as User[];
-      return {
-        total: users.length,
-        stat1: {
+      return [
+        {
+          label: "전체",
+          value: users.length,
+          variant: "info",
+        },
+        {
           label: "활성",
           value: users.filter((u) => u.status === "active").length,
-          color: "#2e7d32",
+          variant: "success",
         },
-        stat2: {
+        {
           label: "비활성",
           value: users.filter((u) => u.status === "inactive").length,
-          color: "#ed6c02",
+          variant: "warning",
         },
-        stat3: {
+        {
           label: "정지",
           value: users.filter((u) => u.status === "suspended").length,
-          color: "#d32f2f",
+          variant: "danger",
         },
-        stat4: {
+        {
           label: "관리자",
           value: users.filter((u) => u.role === "admin").length,
-          color: "#1976d2",
+          variant: "brand",
         },
-      };
+      ];
     } else {
       const posts = data as Post[];
-      return {
-        total: posts.length,
-        stat1: {
+      return [
+        {
+          label: "전체",
+          value: posts.length,
+          variant: "info",
+        },
+        {
           label: "게시됨",
           value: posts.filter((p) => p.status === "published").length,
-          color: "#2e7d32",
+          variant: "success",
         },
-        stat2: {
+        {
           label: "임시저장",
           value: posts.filter((p) => p.status === "draft").length,
-          color: "#ed6c02",
+          variant: "warning",
         },
-        stat3: {
+        {
           label: "보관됨",
           value: posts.filter((p) => p.status === "archived").length,
-          color: "rgba(0, 0, 0, 0.6)",
+          variant: "neutral",
         },
-        stat4: {
+        {
           label: "총 조회수",
           value: posts.reduce((sum, p) => sum + p.views, 0),
-          color: "#1976d2",
+          variant: "brand",
         },
-      };
+      ];
     }
   };
 
@@ -276,59 +285,38 @@ export const ManagementPage: React.FC = () => {
   const stats = getStats();
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f0f0f0" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px" }}>
-        <div style={{ marginBottom: "20px" }}>
-          <h1
-            style={{
-              fontSize: "24px",
-              fontWeight: "bold",
-              marginBottom: "5px",
-              color: "#333",
-            }}
-          >
+    <div className="min-h-screen bg-bg-management transition-colors duration-300">
+      <div className="mx-auto max-w-[1200px] p-5">
+        <div className="mb-5">
+          <h1 className="text-[24px] font-bold text-text-primary transition-colors">
             관리 시스템
           </h1>
-          <p style={{ color: "#666", fontSize: "14px" }}>
+          <p className="text-[14px] text-text-secondary transition-colors">
             사용자와 게시글을 관리하세요
           </p>
         </div>
 
-        <Card variant="bordered" className="p-0">
-          <CardHeader className="border-b-2 border-[#ccc] pb-2 bg-white">
+        <Card variant="bordered" className="p-0 border-alpha-border">
+          <CardHeader className="flex flex-col sm:flex-row gap-4 border-b border-alpha-border pb-4 transition-colors">
             <div className="flex gap-2">
-              <button
+              <Button
+                variant={entityType === "post" ? "primary" : "secondary"}
+                size="sm"
                 onClick={() => setEntityType("post")}
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "14px",
-                  fontWeight: entityType === "post" ? "bold" : "normal",
-                  border: "1px solid #999",
-                  background: entityType === "post" ? "#1976d2" : "#f5f5f5",
-                  color: entityType === "post" ? "white" : "#333",
-                  cursor: "pointer",
-                  borderRadius: "3px",
-                }}
+                className="h-9 min-w-[80px]"
               >
                 게시글
-              </button>
-              <button
+              </Button>
+              <Button
+                variant={entityType === "user" ? "primary" : "secondary"}
+                size="sm"
                 onClick={() => setEntityType("user")}
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "14px",
-                  fontWeight: entityType === "user" ? "bold" : "normal",
-                  border: "1px solid #999",
-                  background: entityType === "user" ? "#1976d2" : "#f5f5f5",
-                  color: entityType === "user" ? "white" : "#333",
-                  cursor: "pointer",
-                  borderRadius: "3px",
-                }}
+                className="h-9 min-w-[80px]"
               >
                 사용자
-              </button>
+              </Button>
             </div>
-            <CardAction>
+            <CardAction className="sm:ml-auto">
               <Button
                 variant="primary"
                 size="md"
@@ -372,162 +360,58 @@ export const ManagementPage: React.FC = () => {
               </div>
             )}
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-                gap: "10px",
-                marginBottom: "15px",
-              }}
-            >
-              <div
-                style={{
-                  padding: "12px 15px",
-                  background: "#e3f2fd",
-                  border: "1px solid #90caf9",
-                  borderRadius: "3px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "12px",
-                    color: "#666",
-                    marginBottom: "4px",
-                  }}
-                >
-                  전체
-                </div>
-                <div
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#1976d2",
-                  }}
-                >
-                  {stats.total}
-                </div>
-              </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-4">
+              {stats.map((stat, index) => {
+                const colors = {
+                  info: "bg-info-light border-info-border text-info-dark",
+                  success:
+                    "bg-success-light border-success-border text-success-dark",
+                  warning:
+                    "bg-warning-light border-warning-border text-warning-dark",
+                  danger:
+                    "bg-danger-light border-danger-border text-danger-dark",
+                  brand:
+                    "bg-brand-light border-brand-border text-brand-primary",
+                  neutral:
+                    "bg-neutral-bg-strong border-neutral-border text-neutral-dark",
+                };
 
-              <div
-                style={{
-                  padding: "12px 15px",
-                  background: "#e8f5e9",
-                  border: "1px solid #81c784",
-                  borderRadius: "3px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "12px",
-                    color: "#666",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {stats.stat1.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#388e3c",
-                  }}
-                >
-                  {stats.stat1.value}
-                </div>
-              </div>
+                const valueColors = {
+                  info: "text-info-primary",
+                  success: "text-success-primary",
+                  warning: "text-warning-primary",
+                  danger: "text-danger-primary",
+                  brand: "text-brand-primary",
+                  neutral: "text-neutral-dark",
+                };
 
-              <div
-                style={{
-                  padding: "12px 15px",
-                  background: "#fff3e0",
-                  border: "1px solid #ffb74d",
-                  borderRadius: "3px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "12px",
-                    color: "#666",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {stats.stat2.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#f57c00",
-                  }}
-                >
-                  {stats.stat2.value}
-                </div>
-              </div>
+                const variant = stat.variant as keyof typeof colors;
 
-              <div
-                style={{
-                  padding: "12px 15px",
-                  background: "#ffebee",
-                  border: "1px solid #e57373",
-                  borderRadius: "3px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "12px",
-                    color: "#666",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {stats.stat3.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#d32f2f",
-                  }}
-                >
-                  {stats.stat3.value}
-                </div>
-              </div>
-
-              <div
-                style={{
-                  padding: "12px 15px",
-                  background: "#f5f5f5",
-                  border: "1px solid #bdbdbd",
-                  borderRadius: "3px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "12px",
-                    color: "#666",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {stats.stat4.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#424242",
-                  }}
-                >
-                  {stats.stat4.value}
-                </div>
-              </div>
+                return (
+                  <div
+                    key={index}
+                    className={cn(
+                      "p-3 rounded-[3px] border transition-colors",
+                      colors[variant],
+                    )}
+                  >
+                    <div className="text-[12px] opacity-70 mb-1">
+                      {stat.label}
+                    </div>
+                    <div
+                      className={cn(
+                        "text-[24px] font-bold transition-colors",
+                        valueColors[variant],
+                      )}
+                    >
+                      {stat.value}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            <div
-              style={{
-                border: "1px solid #ddd",
-                background: "white",
-                overflow: "auto",
-              }}
-            >
+            <div className="border border-alpha-border bg-bg-primary overflow-auto transition-colors">
               <TableContainer
                 columns={renderTableColumns()}
                 data={data}

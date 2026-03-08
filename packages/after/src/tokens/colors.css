@@ -149,6 +149,13 @@
     0px 2px 4px -1px var(--alpha-black-12),
     0px 1px 2px 0px var(--alpha-black-8), 0px 1px 4px 0px var(--alpha-black-8);
 
+  /* Alpha Semantic Tokens (Mapping to Primitives) */
+  --alpha-border: var(--alpha-black-12);
+  --alpha-border-light: var(--alpha-black-8);
+  --alpha-text-primary: var(--alpha-black-87);
+  --alpha-text-secondary: var(--alpha-black-60);
+  --alpha-overlay: var(--alpha-black-50);
+
   /* Modal Specific Shadows */
   --shadow-modal:
     0px 11px 15px -7px var(--alpha-black-20),
@@ -160,7 +167,52 @@
   3. 다크모드 (추후 확장용)
 */
 .dark {
-  /* 필요 시 이 곳에서 위 시맨틱 변수들의 값을 어두운 색상으로 덮어씌웁니다. */
+  /* Backgrounds */
+  --bg-primary: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #242424;
+  --bg-management: #0d0d0d;
+
+  /* Texts */
+  --text-primary: #f5f5f5;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+  --text-inverse: var(--gray-900);
+
+  /* Borders */
+  --border-light: #2c2c2c;
+  --border-base: #383838;
+  --border-strong: #4a4a4a;
+
+  /* Alpha Semantic Overrides (White Alpha for Dark Mode) */
+  --alpha-border: rgba(255, 255, 255, 0.12);
+  --alpha-border-light: rgba(255, 255, 255, 0.08);
+  --alpha-text-primary: rgba(255, 255, 255, 0.87);
+  --alpha-text-secondary: rgba(255, 255, 255, 0.6);
+  --alpha-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Neutral Overrides */
+  --neutral-bg-strong: #242424;
+  --neutral-bg-flat: #1a1a1a;
+  --neutral-border: #383838;
+  --neutral-text-body: #f5f5f5;
+
+  /* Table Specific Overrides */
+  --table-header-bg: #1a1a1a;
+  --table-border: var(--alpha-border);
+  --table-row-border: var(--alpha-border-light);
+  --table-row-hover: rgba(255, 255, 255, 0.04);
+  --table-row-striped: #141414;
+
+  /* Header Specific Overrides */
+  --header-bg: #121212;
+  --header-border: #2c2c2c;
+  --header-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+
+  /* Shadows for Dark Mode (Less intense, more spread) */
+  --shadow-card-default: 0px 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-card-elevated: 0px 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0px 20px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
 /* 
@@ -239,6 +291,13 @@
   --color-header-bg: var(--header-bg);
   --color-header-border: var(--header-border);
   --shadow-header: var(--header-shadow);
+
+  /* Alpha Colors */
+  --color-alpha-border: var(--alpha-border);
+  --color-alpha-border-light: var(--alpha-border-light);
+  --color-alpha-text-primary: var(--alpha-text-primary);
+  --color-alpha-text-secondary: var(--alpha-text-secondary);
+  --color-alpha-overlay: var(--alpha-overlay);
 
   /* Card Shadows */
   --shadow-card-default: var(--shadow-card-default);

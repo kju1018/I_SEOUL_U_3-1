@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Header } from "../components/ui/Header";
 
 const meta = {
-  title: "Organisms/Header",
+  title:"UI/Header",
   component: Header,
   parameters: {
     layout: "fullscreen",

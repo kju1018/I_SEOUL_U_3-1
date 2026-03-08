@@ -11,7 +11,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
       <table
         data-slot="table"
         className={cn(
-          "w-full border-collapse bg-white text-sm font-['Roboto','Helvetica','Arial',sans-serif]",
+          "w-full border-collapse bg-bg-primary text-sm font-['Roboto','Helvetica','Arial',sans-serif] transition-colors",
           className,
         )}
         {...props}
@@ -81,7 +81,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "p-4 text-left align-middle font-medium text-[rgba(0,0,0,0.6)] text-[0.75rem] uppercase tracking-[0.03em] border-b-2 border-table-border whitespace-nowrap",
+        "p-4 text-left align-middle font-medium text-text-secondary text-[0.75rem] uppercase tracking-[0.03em] border-b-2 border-table-border whitespace-nowrap",
         className,
       )}
       {...props}
@@ -94,7 +94,7 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
     <td
       data-slot="table-cell"
       className={cn(
-        "p-4 align-middle text-[rgba(0,0,0,0.87)] whitespace-nowrap",
+        "p-4 align-middle text-text-primary whitespace-nowrap transition-colors",
         className,
       )}
       {...props}
