@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "./components/organisms";
+import { Header } from "./components/ui/Header";
 import { ManagementPage } from "./pages/ManagementPage";
 import "./styles/components.css";
 

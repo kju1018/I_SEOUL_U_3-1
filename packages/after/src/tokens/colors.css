@@ -136,6 +136,11 @@
   --table-row-hover: var(--alpha-black-4);
   --table-row-striped: var(--neutral-bg-flat);
 
+  /* Header Specific Tokens */
+  --header-bg: var(--white);
+  --header-border: var(--gray-200);
+  --header-shadow: 0 1px 3px 0 var(--alpha-black-12);
+
   /* Card Specific Shadows (Material-like) */
   --shadow-card-default:
     0px 2px 1px -1px var(--alpha-black-20),
@@ -229,6 +234,11 @@
   --color-table-row-border: var(--table-row-border);
   --color-table-row-hover: var(--table-row-hover);
   --color-table-row-striped: var(--table-row-striped);
+
+  /* Header Colors */
+  --color-header-bg: var(--header-bg);
+  --color-header-border: var(--header-border);
+  --shadow-header: var(--header-shadow);
 
   /* Card Shadows */
   --shadow-card-default: var(--shadow-card-default);
