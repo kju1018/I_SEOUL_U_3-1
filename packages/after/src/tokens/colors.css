@@ -121,12 +121,21 @@
   /* State: Neutral (Default/Secondary) */
   --neutral-light: var(--gray-50);
   --neutral-bg-strong: var(--gray-100);
+  --neutral-bg-flat: #fafafa; /* Card Flat & Header */
   --neutral-border: var(--gray-300);
   --neutral-border-strong: var(--gray-500);
   --neutral-primary: var(--gray-100);
   --neutral-hover: var(--gray-200);
   --neutral-text-body: var(--gray-800);
   --neutral-dark: var(--gray-900);
+
+  /* Card Specific Shadows (Material-like) */
+  --shadow-card-default:
+    0px 2px 1px -1px var(--alpha-black-20),
+    0px 1px 1px 0px var(--alpha-black-14), 0px 1px 3px 0px var(--alpha-black-12);
+  --shadow-card-elevated:
+    0px 2px 4px -1px var(--alpha-black-12),
+    0px 1px 2px 0px var(--alpha-black-8), 0px 1px 4px 0px var(--alpha-black-8);
 }
 
 /* 
@@ -193,10 +202,15 @@
   /* Neutral Colors */
   --color-neutral-light: var(--neutral-light);
   --color-neutral-bg-strong: var(--neutral-bg-strong);
+  --color-neutral-bg-flat: var(--neutral-bg-flat);
   --color-neutral-border: var(--neutral-border);
   --color-neutral-border-strong: var(--neutral-border-strong);
   --color-neutral-primary: var(--neutral-primary);
   --color-neutral-hover: var(--neutral-hover);
   --color-neutral-text-body: var(--neutral-text-body);
   --color-neutral-dark: var(--neutral-dark);
+
+  /* Card Shadows */
+  --shadow-card-default: var(--shadow-card-default);
+  --shadow-card-elevated: var(--shadow-card-elevated);
 }

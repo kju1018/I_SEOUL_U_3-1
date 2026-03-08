@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Alert, AlertTitle, AlertDescription } from "../components/ui/alert";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardAction,
+} from "../components/ui/card";
 import { CheckCircle, AlertCircle, Info, X } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Table, Modal } from "../components/organisms";
@@ -279,55 +286,41 @@ export const ManagementPage: React.FC = () => {
           </p>
         </div>
 
-        <div
-          style={{
-            background: "white",
-            border: "1px solid #ddd",
-            padding: "10px",
-          }}
-        >
-          <div
-            style={{
-              marginBottom: "15px",
-              borderBottom: "2px solid #ccc",
-              paddingBottom: "5px",
-            }}
-          >
-            <button
-              onClick={() => setEntityType("post")}
-              style={{
-                padding: "8px 16px",
-                marginRight: "5px",
-                fontSize: "14px",
-                fontWeight: entityType === "post" ? "bold" : "normal",
-                border: "1px solid #999",
-                background: entityType === "post" ? "#1976d2" : "#f5f5f5",
-                color: entityType === "post" ? "white" : "#333",
-                cursor: "pointer",
-                borderRadius: "3px",
-              }}
-            >
-              게시글
-            </button>
-            <button
-              onClick={() => setEntityType("user")}
-              style={{
-                padding: "8px 16px",
-                fontSize: "14px",
-                fontWeight: entityType === "user" ? "bold" : "normal",
-                border: "1px solid #999",
-                background: entityType === "user" ? "#1976d2" : "#f5f5f5",
-                color: entityType === "user" ? "white" : "#333",
-                cursor: "pointer",
-                borderRadius: "3px",
-              }}
-            >
-              사용자
-            </button>
-          </div>
-
-          <div>
-            <div style={{ marginBottom: "15px", textAlign: "right" }}>
+        <Card variant="bordered" className="p-0">
+          <CardHeader className="border-b-2 border-[#ccc] pb-2 bg-white">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setEntityType("post")}
+                style={{
+                  padding: "8px 16px",
+                  fontSize: "14px",
+                  fontWeight: entityType === "post" ? "bold" : "normal",
+                  border: "1px solid #999",
+                  background: entityType === "post" ? "#1976d2" : "#f5f5f5",
+                  color: entityType === "post" ? "white" : "#333",
+                  cursor: "pointer",
+                  borderRadius: "3px",
+                }}
+              >
+                게시글
+              </button>
+              <button
+                onClick={() => setEntityType("user")}
+                style={{
+                  padding: "8px 16px",
+                  fontSize: "14px",
+                  fontWeight: entityType === "user" ? "bold" : "normal",
+                  border: "1px solid #999",
+                  background: entityType === "user" ? "#1976d2" : "#f5f5f5",
+                  color: entityType === "user" ? "white" : "#333",
+                  cursor: "pointer",
+                  borderRadius: "3px",
+                }}
+              >
+                사용자
+              </button>
+            </div>
+            <CardAction>
               <Button
                 variant="primary"
                 size="md"
@@ -335,8 +328,10 @@ export const ManagementPage: React.FC = () => {
               >
                 새로 만들기
               </Button>
-            </div>
+            </CardAction>
+          </CardHeader>
 
+          <CardContent className="p-5">
             {showSuccessAlert && (
               <div className="mb-4">
                 <Alert variant="success" className="relative pr-12">
@@ -538,8 +533,8 @@ export const ManagementPage: React.FC = () => {
                 onRestore={(id) => handleStatusAction(id, "restore")}
               />
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
 
       <Modal
